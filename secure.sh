@@ -1,5 +1,3 @@
-# Start with this one
-
 # updates
 sudo apt-get update -y
 sudo apt-get upgrade -y
@@ -16,4 +14,7 @@ sudo dpkg -i *.deb
 # firewall
 sudo ufw enable
 
-# guest
+# remove guest account
+sudo sh -c 'printf "[SeatDefaults]\nallow-guest=false\n" >/usr/share/lightdm/lightdm.conf.d/50-no-guest.conf'
+
+# password policy
