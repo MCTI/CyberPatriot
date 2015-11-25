@@ -8,7 +8,7 @@ function main {
     echo "run as 'sudo sh secure.sh 2>&1 | tee output.log' to output the console output to a log file."
     echo "refer to /root/.logfiles/ folder for program logs"
     #preperation
-    echo "Making directories.."
+    echo "Initializing log files.."
     mkdir -v $HOME/.log-files
     cd $HOME/.log-files
     #installs
@@ -17,7 +17,7 @@ function main {
     apt-get update
     apt-get upgrade
     #information gathering
-    echo "Gathering information!"
+    echo "Logging info from some tools we installed!"
     hardinfo -r -f html > /root/.logfiles/hardinfo-html.html
     chkrootkit > /root/.logfiles/chkrootkit.log
     checkps > /root/.logfiles/checkps.log
