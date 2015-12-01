@@ -11,7 +11,15 @@ function main {
     echo "Initializing log files.."
     mkdir -v $HOME/.log-files
     cd $HOME/.log-files
-    #installs
+    #updates/installs
+    echo "Updating kernel to v4.3.."
+    cd /tmp/
+    wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.3-wily/linux-headers-4.3.0-040300-generic_4.3.0-040300.201511020949_amd64.deb
+    wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.3-wily/linux-headers-4.3.0-040300_4.3.0-040300.201511020949_all.deb
+    wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.3-wily/linux-image-4.3.0-040300-generic_4.3.0-040300.201511020949_amd64.deb
+    dpkg -i *.deb
+    echo "Kernel updated! You WILL need to reboot."
+    cd /
     echo "Installing firefox, hardinfo, chkrootkit, iptables, portsentry, lynis & ufw.."
     apt-get -V -y install firefox, hardinfo, chkrootkit, iptables, portsentry, lynis, ufw
     apt-get update
@@ -22,6 +30,9 @@ function main {
     chkrootkit > /root/.logfiles/chkrootkit.log
     checkps > /root/.logfiles/checkps.log
     lynis -c > /root/.logfiles/lynis.log
+    #account security
+    echo "Setting password expiry.."
+    chage -M 60 -W 7
     #network security
     echo "Firewall configuration.."
     iptables -A INPUT -p tcp -s 0/0 -d 0/0 --dport 23 -j DROP         #Block Telnet
@@ -62,9 +73,6 @@ function main {
     find /home -name '*.jpeg' -type f -delete
     echo "Disabling guest account.."
     sh -c 'printf "[SeatDefaults]\nallow-guest=false\n" >/usr/share/lightdm/lightdm.conf.d/50-no-guest.conf'
-    cd kernel
-    echo "Updating kernel!"
-    dpkg -i *.deb 
 }
 
 if [ "$(id -u)" != "0" ]; then
