@@ -1,5 +1,4 @@
 #!/bin/bash
-
 function main {
     #variable assignment
     now="$(date +'%d/%m/%Y %r')"
@@ -11,6 +10,9 @@ function main {
     echo "Initializing log files.."
     mkdir -v $HOME/.log-files
     cd $HOME/.log-files
+    # Disable root
+    echo "Making sure root is disabled.."
+
     #updates/installs
     echo "Updating kernel to v4.3.."
     cd /tmp/
@@ -32,10 +34,10 @@ function main {
     lynis -c > /root/.logfiles/lynis.log
     #account security
     echo "Setting password expiry.."
-    chage -M 60 -W 7
     #network security
     echo "Firewall configuration.."
-    iptables -A INPUT -p tcp -s 0/0 -d 0/0 --dport 23 -j DROP         #Block Telnet
+    iptables -A INPUT -p tcp -s 0/0 -d 0/0 --dport 23 -j DROP         
+    chage -M 60 -W 7#Block Telnet
     echo "Blocked Telnet!"
     iptables -A INPUT -p tcp -s 0/0 -d 0/0 --dport 2049 -j DROP       #Block NFS
     echo "Blocked NFS!"
@@ -75,9 +77,26 @@ function main {
     sh -c 'printf "[SeatDefaults]\nallow-guest=false\n" >/usr/share/lightdm/lightdm.conf.d/50-no-guest.conf'
 }
 
+function check {
+    # Checking if you read the scenario
+    echo "Make sure you READ THE SCENARIO"
+    echo "R E A D  T H E  S C E N A R I O"
+    echo -n "Did you read scenario? (y/n) "
+    old_stty_cfg=$(stty -g)
+    stty raw -echo
+    answer=$( while ! head -c 1 | grep -i '[ny]' ;do true ;done )
+    stty $old_stty_cfg
+    if echo "$answer" | grep -iq "^y" ;then
+        main
+    else
+        echo "READ THE SCENARIO"
+        exit
+    fi
+}
+
 if [ "$(id -u)" != "0" ]; then
     echo "Elevated permissions required. Run again as sudo."
     exit
 else
-    main
+    check
 fi
