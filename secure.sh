@@ -12,7 +12,7 @@ function main {
     cd $HOME/.log-files
     # Disable root
     echo "Making sure root is disabled.."
-
+    passwd -l root
     #updates/installs
     echo "Updating kernel to v4.3.."
     cd /tmp/
@@ -37,7 +37,7 @@ function main {
     #network security
     echo "Firewall configuration.."
     iptables -A INPUT -p tcp -s 0/0 -d 0/0 --dport 23 -j DROP         
-    chage -M 60 -W 7#Block Telnet
+    chage -M 60 -W 7                                                  #Block Telnet
     echo "Blocked Telnet!"
     iptables -A INPUT -p tcp -s 0/0 -d 0/0 --dport 2049 -j DROP       #Block NFS
     echo "Blocked NFS!"
