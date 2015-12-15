@@ -9,7 +9,7 @@ if [[ $EUID -ne 0 ]]; then
 fi
 
 list_all_services() {
-    service --status-all | less -P "Services"
+    service --status-all | less -P "Services (:q to exit)"
 }
 
 set_update_settings() {
