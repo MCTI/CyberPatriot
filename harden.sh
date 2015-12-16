@@ -201,6 +201,8 @@ echo "##### Removing any 'hacking tools' from system #####"
 remove_hacking_tools
 
 echo "##### Listing all currently active services #####"
+echo "# to remove a serivce:"
+echo "# sudo apt-get -y autoremove --purge <package>"
 list_all_services
 
 echo "##### Removing any instances of NOPASSWD in /etc/sudoers #####"
@@ -211,14 +213,6 @@ find_media_files_in_dir
 
 echo "##### Disabling the guest account #####"
 disableGuestAccount
-
-read -p "Do you want to enable password policy?" answer
-if [[ $answer == [yY] ]]; then
-    echo "##### Setting up password policy#####"
-    setup_password_history
-else
-    echo "No password policy"
-fi
 
 read -p "Would you like to change all user passwords?" answer
 if [[ $answer == [yY] ]]; then
