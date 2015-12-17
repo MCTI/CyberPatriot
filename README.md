@@ -7,7 +7,7 @@ to remove a service: `sudo apt-get -y autoremove --purge <package>`
 
 #installation
 
-```shell
+```bash
 wget https://gist.githubusercontent.com/cxdy/5fbee99fcb1f863a770c/raw/eaf7211b2c00dec2883612deac3a675af24b83ea/run.sh
 chmod +x run.sh
 # To run:
@@ -16,7 +16,7 @@ chmod +x run.sh
 
 #manual installation
 
-```shell
+```bash
 mkdir scripts
 cd scripts
 # CyberPatriot Security Script
