@@ -1,9 +1,9 @@
 # cyberpatriot
 scripts for cyberpatriot
 
-
 to remove a service: `sudo apt-get -y autoremove --purge <package>`
 
+EVERY TIME YOU UPDATE A SCRIPT YOU NEED TO UPDATE THE GISTS AND THE LINKS IN THE GISTS.
 
 #installation
 
