@@ -27,7 +27,7 @@ else
     cd scripts
     echo "# Downloading scripts.."
     wget https://gist.github.com/cxdy/47a31af2c57886eee678/raw/e6db3a018acecb60cb05669d1354dd710ff2af01/CyberPatriot.sh
-    wget https://gist.github.com/cxdy/cd62d4a93a905d299ef9/raw/c0f1ad7a0d5ae3c23c0f0e4eece90f31c1468dbf/password.sh
+    wget https://gist.github.com/cxdy/cd62d4a93a905d299ef9/raw/f10e6a421dc1ffd16942085cfe87cda3ee94ccae/password.sh
     echo "# Applying necessary permissions to scripts.."
     chmod +x CyberPatriot.sh
     chmod +x password.sh
