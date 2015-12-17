@@ -27,6 +27,6 @@ chmod +x CyberPatriot.sh
 chmod +x password.sh
 
 # To run:
-./CyberPatriot.sh (CyberPatriot Security Script)
-./password.sh (Password policy script, should be a last resort for points.)
+./CyberPatriot.sh # (CyberPatriot Security Script)
+./password.sh # (Password policy script, should be a last resort for points.)
 ````
