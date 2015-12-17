@@ -3,8 +3,10 @@ if [[ $EUID -ne 0 ]]; then
     echo "This script must be run as root" 1>&2
     exit 1
 fi
-
+sudo apt-get update -y
+sudo apt-get upgrade -y
 sudo apt-get install libpam-cracklib --force-yes -y
+sudo apt-get install perl --force-yes -y
 
 # check to see if there is a pam_tally.so line - add if absent, replace if necessary
 tallyExists=$(grep pam_tally.so /etc/pam.d/common-auth|wc -l)
