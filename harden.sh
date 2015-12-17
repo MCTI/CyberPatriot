@@ -1,6 +1,5 @@
 #!/bin/bash
-
-# Secure.SH Version 2
+# CyberPatriot.sh Version 2
 
 # exit out if we're not root
 if [[ $EUID -ne 0 ]]; then
@@ -176,66 +175,81 @@ firewall_config() {
     echo "Blocked fake loopback packets!"
 }
 
-echo "##### Configuring firewall #####"
-firewall_config
+# Checking if you read the scenario
+echo "# Ubuntu Security Scripts"
+echo "# Make sure you READ THE SCENARIO"
+echo "# R E A D  T H E  S C E N A R I O"
+echo -n "# Did you read scenario? (y/n) "
+old_stty_cfg=$(stty -g)
+stty raw -echo
+answer=$( while ! head -c 1 | grep -i '[ny]' ;do true ;done )
+stty $old_stty_cfg
+if echo "$answer" | grep -iq "^y" ;then
+  echo "##### Configuring firewall #####"
+  firewall_config
 
-echo "##### Installing security tools #####"
-install_software
+  echo "##### Installing security tools #####"
+  install_software
 
-echo "##### Logging info from security tools #####"
-log_antivirus
+  echo "##### Logging info from security tools #####"
+  log_antivirus
 
-echo "##### Setting apt update settings #####"
-set_update_settings
+  echo "##### Setting apt update settings #####"
+  set_update_settings
 
-echo "##### Enabling default apt repositoriess #####"
-enable_repositories
+  echo "##### Enabling default apt repositoriess #####"
+  enable_repositories
 
-echo "##### Disabling SSH root login #####"
-disable_ssh_root_login
+  echo "##### Disabling SSH root login #####"
+  disable_ssh_root_login
 
-echo "##### Making sure root is the only user with UID 0 #####"
-preserve_root_uid
+  echo "##### Making sure root is the only user with UID 0 #####"
+  preserve_root_uid
 
-echo "##### Removing any 'hacking tools' from system #####"
-remove_hacking_tools
+  echo "##### Removing any 'hacking tools' from system #####"
+  remove_hacking_tools
 
-echo "##### Listing all currently active services #####"
-echo "# to remove a serivce:"
-echo "# sudo apt-get -y autoremove --purge <package>"
-list_all_services
+  echo "##### Listing all currently active services #####"
+  echo "# to remove a serivce:"
+  echo "# sudo apt-get -y autoremove --purge <package>"
+  list_all_services
 
-echo "##### Removing any instances of NOPASSWD in /etc/sudoers #####"
-check_no_pass
+  echo "##### Removing any instances of NOPASSWD in /etc/sudoers #####"
+  check_no_pass
 
-echo "##### Searching for any media files in /home #####"
-find_media_files_in_dir
+  echo "##### Searching for any media files in /home #####"
+  find_media_files_in_dir
 
-echo "##### Disabling the guest account #####"
-disableGuestAccount
+  echo "##### Disabling the guest account #####"
+  disableGuestAccount
 
-read -p "Would you like to change all user passwords?" answer
-if [[ $answer == [yY] ]]; then
-    change_user_passwords
+  read -p "Would you like to change all user passwords?" answer
+  if [[ $answer == [yY] ]]; then
+      change_user_passwords
+  else
+      echo "Not changing user passwords"
+  fi
+
+  read -p "Would you like to lock the root account?" answer
+  if [[ $answer == [yY] ]]; then
+      disable_root_account
+  else
+      echo "Not locking root account."
+  fi
+
+  read -p "Do you want to update the kernel?" answer
+  if [[ $answer == [yY] ]]; then
+      update_kernel
+  else
+      echo "Kernel not updating"
+  fi
+
+  echo "##### Listing users in sensitive groups #####"
+  list_sensitive_groups
+
+  echo "##### System secured #####"
+  exit
 else
-    echo "Not changing user passwords"
+    echo "READ THE SCENARIO"
+    exit
 fi
-
-read -p "Would you like to lock the root account?" answer
-if [[ $answer == [yY] ]]; then
-    disable_root_account
-else
-    echo "Not locking root account."
-fi
-
-read -p "Do you want to update the kernel?" answer
-if [[ $answer == [yY] ]]; then
-    update_kernel
-else
-    echo "Kernel not updating"
-fi
-
-echo "##### Listing users in sensitive groups #####"
-list_sensitive_groups
-
-echo "##### System secured #####"
