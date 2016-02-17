@@ -1,4 +1,5 @@
-# CyberPatriot VIII - Ubuntu 14.04 (Round 4)
+# CyberPatriot VIII - Ubuntu 14.04 (Round 4) - Team 08-1021
+### Please read the scenario before continuing
 
 #### Limit 'su' access to sudoers only
 
@@ -55,3 +56,41 @@ Add the following lines
 order bind,hosts
 nospoof on
 ```
+#### Harden PHP (if installed)
+Open the PHP.ini file
+
+    sudo nano /etc/php5/apache2/php.ini
+    
+Add the following lines
+```
+disable_functions = exec,system,shell_exec,passthru
+register_globals = Off
+expose_php = Off
+```
+
+#### Harden Apache (if installed)
+```
+External resources:
+
+http://www.thefanclub.co.za/how-to/how-install-apache2-modsecurity-and-modevasive-ubuntu-1204-lts-server
+```
+
+#### Install Fail2Ban
+
+Install Fail2Ban
+
+    sudo apt-get install fail2ban
+    
+Configure Fail2Ban
+```
+sudo nano /etc/fail2ban/jail.conf
+
+Select the services you want to monitor
+```
+
+#### Check for rootkits - RKHunter and CHKRootKit
+Install RKHunter and CHKRootKit
+    
+    sudo apt-get install rkhunter chkrootkit
+
+To run CHKRootKit
