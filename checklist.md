@@ -4,7 +4,8 @@
     dpkg-statoverride --update --add root sudo 4750 /bin/su
 
 #### Improve IP security
-```# Ignore ICMP broadcast requests
+```
+# Ignore ICMP broadcast requests
 net.ipv4.icmp_echo_ignore_broadcasts = 1
 
 # Disable source packet routing
@@ -33,4 +34,5 @@ net.ipv4.conf.default.accept_redirects = 0
 net.ipv6.conf.default.accept_redirects = 0
 
 # Ignore Directed pings
-net.ipv4.icmp_echo_ignore_all = 1```
+net.ipv4.icmp_echo_ignore_all = 1
+```
