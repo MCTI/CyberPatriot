@@ -4,6 +4,8 @@
     dpkg-statoverride --update --add root sudo 4750 /bin/su
 
 #### Improve IP security
+    sudo nano /etc/sysctl.conf
+    
 ```
 # Ignore ICMP broadcast requests
 net.ipv4.icmp_echo_ignore_broadcasts = 1
@@ -36,3 +38,5 @@ net.ipv6.conf.default.accept_redirects = 0
 # Ignore Directed pings
 net.ipv4.icmp_echo_ignore_all = 1
 ```
+Restart the sysctl daemon
+    sudo sysctl -p
