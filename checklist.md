@@ -94,3 +94,25 @@ Install RKHunter and CHKRootKit
     sudo apt-get install rkhunter chkrootkit
 
 To run CHKRootKit
+
+    sudo chkrootkit
+    
+To update & run RKHunter
+```
+sudo rkhunter --update
+sudo rkhunter --propupd
+sudo rkhunter --check
+```
+
+### Scan open ports (nmap)
+Install nmap
+
+    sudo apt-get install nmap
+    
+Scan system for open ports
+
+    sudo nmap -v -sT localhost
+    
+SYN scanning
+
+    sudo nmap -v -sS localhost
