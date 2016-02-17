@@ -45,3 +45,13 @@ net.ipv4.icmp_echo_ignore_all = 1
 Restart the sysctl daemon
 
     sudo sysctl -p
+
+#### Prevent IP spoofing
+Open the host file
+
+    sudo nano /etc/host.conf
+Add the following lines
+```
+order bind,hosts
+nospoof on
+```
