@@ -1,11 +1,15 @@
 # CyberPatriot VIII - Ubuntu 14.04 (Round 4)
 
 #### Limit 'su' access to sudoers only
+
     dpkg-statoverride --update --add root sudo 4750 /bin/su
 
 #### Improve IP security
+Open the sysctl config
+
     sudo nano /etc/sysctl.conf
-    
+   
+Add the following lines to the file
 ```
 # Ignore ICMP broadcast requests
 net.ipv4.icmp_echo_ignore_broadcasts = 1
@@ -39,4 +43,5 @@ net.ipv6.conf.default.accept_redirects = 0
 net.ipv4.icmp_echo_ignore_all = 1
 ```
 Restart the sysctl daemon
+
     sudo sysctl -p
