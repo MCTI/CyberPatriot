@@ -95,15 +95,15 @@ list_sensitive_groups() {
     grep sudo /etc/group | cut -d ':' -f 4
 }
 
-change_user_passwords() {
-    pass='CyberPatriot!'
-    echo "Changing all user passwords to $pass"
-    echo 'NEVER RUN THIS IN A PRODUCTION IMAGE!'
-    for i in $(ls /home); do # ls like a boss
-        # globs be hatin on us
-        chpasswd <<< "$i:$pass"
-    done
-}
+# change_user_passwords() {
+#   u="$USER"
+#   pass='CyberPatriot!'
+#   echo "Changing all user passwords to $pass"
+#   echo 'NEVER RUN THIS IN A PRODUCTION IMAGE!'
+#    for i in $(ls /home); do # ls like a boss
+         # globs be hatin on us
+#        chpasswd <<< "$i:$pass"
+#}
 
 disable_guest_account() {
     echo 'allow-guest=false' >> /etc/lightdm/lightdm.conf
