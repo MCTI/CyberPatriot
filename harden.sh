@@ -105,7 +105,7 @@ list_sensitive_groups() {
 #        chpasswd <<< "$i:$pass"
 #}
 
-disable_guest_account() {
+disable_Guest_Account() {
     echo 'allow-guest=false' >> /etc/lightdm/lightdm.conf
     echo "Disabled guest account."
 }
@@ -124,22 +124,12 @@ disable_root_account() {
   echo "Locked root account."
 }
 
-update_kernel() {
-    echo "Updating kernel to v4.3.."
-    cd /tmp/
-    wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.3-wily/linux-headers-4.3.0-040300-generic_4.3.0-040300.201511020949_amd64.deb
-    wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.3-wily/linux-headers-4.3.0-040300_4.3.0-040300.201511020949_all.deb
-    wget http://kernel.ubuntu.com/~kernel-ppa/mainline/v4.3-wily/linux-image-4.3.0-040300-generic_4.3.0-040300.201511020949_amd64.deb
-    dpkg -i *.deb
-    echo "Kernel updated! You WILL need to reboot."
-}
-
 install_software() {
     cd /
     echo "Installing firefox, hardinfo, chkrootkit, iptables, portsentry, lynis & ufw.."
-    apt-get -V -y install firefox, hardinfo, chkrootkit, iptables, portsentry, lynis, ufw
     apt-get update
     apt-get upgrade
+    apt-get -V -y install firefox, hardinfo, chkrootkit, iptables, portsentry, lynis, ufw
 }
 
 log_antivirus() {
@@ -221,7 +211,7 @@ if echo "$answer" | grep -iq "^y" ;then
   find_media_files_in_dir
 
   echo "##### Disabling the guest account #####"
-  disableGuestAccount
+  disable_Guest_Account
 
   read -p "Would you like to change all user passwords?" answer
   if [[ $answer == [yY] ]]; then
@@ -235,13 +225,6 @@ if echo "$answer" | grep -iq "^y" ;then
       disable_root_account
   else
       echo "Not locking root account."
-  fi
-
-  read -p "Do you want to update the kernel?" answer
-  if [[ $answer == [yY] ]]; then
-      update_kernel
-  else
-      echo "Kernel not updating"
   fi
 
   echo "##### Listing users in sensitive groups #####"
